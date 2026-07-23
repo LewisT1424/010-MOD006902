@@ -24,14 +24,16 @@ def ensure_java() -> None:
     os.environ['JAVA_HOME'] = java_home
     os.environ['PATH'] = os.path.join(java_home, 'bin') + os.pathsep + os.environ.get('PATH', '')
 
-def get_spark(app_name: str = 'waterpump', master: str = 'local[*]'):
-    '''Return a configured SparkSession, installed Java first if needed'''
+def get_spark(app_name: str = "waterpump", master: str = "local[*]"):
+    """Return a configured SparkSession, installing Java first if needed."""
     ensure_java()
     from pyspark.sql import SparkSession
     return (
         SparkSession.builder
         .appName(app_name)
         .master(master)
-        .config('spark.driver.memory', '2g')
+        .config("spark.driver.memory", "2g")
+        .config("spark.driver.host", "127.0.0.1")
+        .config("spark.driver.bindAddress", "127.0.0.1")
         .getOrCreate()
     )
