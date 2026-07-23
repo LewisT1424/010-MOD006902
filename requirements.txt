@@ -1,5 +1,6 @@
 pyspark==3.5.1
 pytest==8.2.0
 chispa==0.9.4
-ipykernel 
+numpy
+matplotlib
 install-jdk==1.1.0
